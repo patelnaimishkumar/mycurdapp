@@ -1,0 +1,11 @@
+<h1 #header></h1>
+<div class="panel panel-primary" *ngFor="let emp of employees">
+  <div (click)="header.innerHTML=child.employee?.name">
+  {{empFromchild?.name}} {{empFromchild?.gender}}
+  <app-display-employee [employee]="emp" (notify)="setName($event)" #child></app-display-employee>
+</div>
+</div> 
+<!--<button type="button" (click)="nextEmp()">Next Emp</button>
+<div>
+<app-display-employee [employee]="employeeToDisplay"></app-display-employee>
+</div>-->

@@ -1,0 +1,69 @@
+<div>
+    <form #employeeform="ngForm"  (ngSubmit)="saveEmployee(employeeform)">
+ <table >
+     <tr>
+         <td>id</td>
+         <td><input type="text" name="id" [(ngModel)]="employee.id"/></td>
+     </tr>
+     <tr>
+            <td>name</td>
+            <td><input type="text" name="name" [(ngModel)]="employee.name"/></td>
+        </tr>
+        <tr>
+                <td>gender</td>
+                <td><input type="radio" name="gender" [(ngModel)]="employee.gender" value="M"/>Male</td>
+                <td><input type="radio" name="gender" [(ngModel)]="employee.gender" value="F"/>FeMale</td>
+            </tr>
+            <tr>
+                    <td>Email</td>
+                    <td><input [required]="contactpref.value=='E'" email type="text" name="email" [(ngModel)]="employee.email" #email="ngModel"/></td>
+                    <span *ngIf="email.errors?.email">email is not valid</span>
+                    <span *ngIf="email.errors?.required">email is required</span>
+                    
+                </tr>
+                <tr>
+                        <td>ph no</td>
+                        <td><input type="text" [required]="contactpref.value=='P'" name="phno" #phno="ngModel" [(ngModel)]="employee.phno"/></td>
+                        <span *ngIf="phno.errors?.required">phone is required</span>
+                    </tr>
+
+                    <tr>
+                            <td>contact pref</td>
+                            <td><input type="radio" name="contactpref" #contactpref="ngModel" [(ngModel)]="employee.contactpref" value="E"/>Email</td>
+                            <td><input type="radio" name="contactpref" #contactpref="ngModel" [(ngModel)]="employee.contactpref" value="P"/>phone</td>
+                        </tr>
+                        <tr>
+                                <td>Dob</td>
+                                <td><input type="date" name="dob" [(ngModel)]="employee.dob"/></td>
+                            </tr>
+                            <tr>
+                                    <td>Department</td>
+                                    <td>
+                                        <select name="department" selectvalidators="select" #department='ngModel' [(ngModel)]="employee.department"  >
+                                            <option value="select">selected</option>
+                                            <option *ngFor="let dept of departments " [value]="dept.id">{{dept.name}}</option>
+                                        </select>
+                                        <span *ngIf="department.touched&&department.errors?.defaultselected"> Department required</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                        <td><input type="checkbox" name="isactive" [(ngModel)]="employee.isactive"/>isactive</td>
+                                    </tr>
+                                    <tr>
+                                        <td>photo path</td>
+                                        <td><input type="text" name="photopath" [(ngModel)]="employee.photopath"/></td>
+                                    </tr> 
+                                    <tr>
+                                       <img *ngIf="previewphoto" height="200" width="200" [src]="employee.photopath">                                       
+                                    </tr>  
+                                    <tr>
+                                        <button type="button" (click)="previewphotobtn()" >{{previewphoto?'hide ':'show '}}preview</button>
+                                    </tr>                     
+            <tr>
+                    <td><button type="submit" >save</button></td>
+                   
+                </tr>
+ </table> 
+</form> 
+</div>
+<div>{{employeeform.value|json}}</div>
